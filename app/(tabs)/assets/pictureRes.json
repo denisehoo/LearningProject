@@ -1,0 +1,5 @@
+[
+    { "label": "Square", "value": "512x512" },
+    { "label": "Portrait", "value": "512x768" },
+    { "label": "Landscape", "value": "768x512" }
+]
