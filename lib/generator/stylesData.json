@@ -1,0 +1,43 @@
+[
+{
+    "label": "No Style",
+    "value": "no-style",
+    "name": "no-style",
+    "positive": "",
+    "negative": ""
+},
+{
+    "label":"cinematic",
+    "value": "cinematic",
+    "name": "cinematic",
+    "positive": "cinematic shot, dynamic lighting, 75mm, Technicolor, Panavision, cinemascope, sharp focus, fine details, 8k, HDR, realism, realistic, key visual, film still, superb cinematic color grading, depth of field",
+    "negative": "bad lighting, low-quality, deformed, text, poorly drawn, holding camera, bad art, bad angle, boring, low-resolution, worst quality, bad composition, disfigured"
+},
+{
+    "label": "traditional-japanese",
+    "value": "traditional-japanese",
+    "name": "traditional-japanese",
+    "positive": "in ukiyo-e art style, traditional japanese masterpiece",
+    "negative": "blurry, low resolution, worst quality, fuzzy"
+},
+{
+    "label": "3D Disney Character",
+    "value": "3D Disney Character",
+    "name": "3D Disney Character",
+    "positive": "3D cartoon Disney character portrait render. bokeh, 4k, highly detailed, Pixar render, CGI Animation, Disney, cute big circular reflective eyes, dof, (cinematic film), Disney realism, subtle details, breathtaking Pixar short, fine details, close up, sharp focus, HDR, Disney-style octane render, incredible composition, superb lighting and detail",
+    "negative": "worst quality, poorly drawn, bad art, boring, deformed, bad composition, crappy artwork, bad lighting"
+},
+{
+    "label": "3D Pokemon",
+    "value": "3D Pokemon",
+    "name": "3D Pokemon",
+    "positive": "a pokemon creature, 4k render, beautiful pokemon digital art, fakemon, pokemon creature, cryptid, fakemon, masterpiece, {soft|sharp} focus, (best quality, high quality:1.3)",
+    "negative": "worst quality, poorly drawn, bad art, boring, deformed, bad composition, crappy artwork, bad lighting"
+},
+{
+    "label": "2D Pokemon",
+    "value": "2D Pokemon",
+    "name": "2D Pokemon",
+    "positive": "pokemon creature concept, superb line art, beautiful colors and composition, 2d art style, beautiful pokemon digital art, fakemon, by Sowsow, pokemon creature, cryptid, fakemon, masterpiece, by Yuu Nishida, 4k",
+    "negative": "multiple, grid, (black and white), distorted, deformed, bad art, low quality, crappy 3D render, text watermark symbols logo"
+}]
