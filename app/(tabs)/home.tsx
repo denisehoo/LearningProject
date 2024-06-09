@@ -5,15 +5,18 @@ import { Models } from "react-native-appwrite";
 
 import { images } from "../../constants";
 import useAppwrite from "../../lib/useAppwrite";
-import { getAllPosts, getLatestPosts } from "../../lib/appwrite";
-import { EmptyState, SearchInput, Trending, VideoCard } from "../../components";
+import { getAllPhotoPosts, getLatestPhotoPosts, getAllPosts, getLatestPosts } from "../../lib/appwrite";
+import { EmptyState, PhotoCard, SearchInput, Trending, VideoCard } from "../../components";
 import { useGlobalContext } from "../../context/GlobalProvider";
+import TrendingPhoto from "@/components/TrendingPhoto";
 
 
 const Home = () => {
   const { user } = useGlobalContext();
-  const { data: posts, refetch } = useAppwrite({ fn: getAllPosts }); 
-  const { data: latestPosts } = useAppwrite({ fn: getLatestPosts });
+/*   const { data: posts, refetch } = useAppwrite({ fn: getAllPosts }); 
+  const { data: latestPosts } = useAppwrite({ fn: getLatestPosts }); */
+  const { data: posts, refetch } = useAppwrite({ fn: getAllPhotoPosts }); 
+  const { data: latestPosts } = useAppwrite({ fn: getLatestPhotoPosts });
 
   const [refreshing, setRefreshing] = useState(false);
 
@@ -28,13 +31,19 @@ const Home = () => {
       <FlatList
         data={posts}
         keyExtractor={(item:Models.Document) => item.$id}
-        renderItem={({ item }) => (
-          <VideoCard
+        renderItem={({ item }) => (  
+          <PhotoCard
+            document = {item}
             title={item.title}
-            thumbnail={item.thumbnail}
-            video={item.video}
             creator={item.creator.username}
             avatar={item.creator.avatar}
+            photo={item.photo}
+            artStyle={item.artStyle}
+            description={item.description}
+            positive={item.positive}
+            negative={item.negative}
+            likes={item.likes}
+            handleRefresh={onRefresh}
           />
         )}
         ListHeaderComponent={() => (
@@ -62,17 +71,17 @@ const Home = () => {
 
             <View className="w-full flex-1 pt-5 pb-8">
               <Text className="text-lg font-pregular text-gray-100 mb-3">
-                Latest Videos
+                Latest Photos
               </Text>
 
-              <Trending posts={latestPosts ?? []} />
+              <TrendingPhoto posts={latestPosts ?? []} />
             </View>
           </View>
         )}
         ListEmptyComponent={() => (
           <EmptyState
-            title="No Videos Found"
-            subtitle="No videos created yet"
+            title="No Photos Found"
+            subtitle="No photos created yet"
           />
         )}
         refreshControl={

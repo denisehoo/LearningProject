@@ -4,6 +4,7 @@ import { useFonts } from 'expo-font';
 import "react-native-url-polyfill/auto";
 
 import GlobalProvider from '../context/GlobalProvider';
+import { Alert } from 'react-native';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -21,7 +22,7 @@ const RootLayout = () => {
   })
 
   useEffect(() => {
-    if (error) throw error;
+    if (error) Alert.alert("Error", error.message);;
 
     if (fontsLoaded) {
       SplashScreen.hideAsync();

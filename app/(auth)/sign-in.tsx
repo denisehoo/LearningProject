@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, router } from "expo-router";
+import * as Haptics from 'expo-haptics';
 import { SafeAreaView } from "react-native-safe-area-context";
 import { View, Text, ScrollView, Dimensions, Alert, Image } from "react-native";
 
@@ -39,7 +40,7 @@ const SignIn = () => {
   const submit = async () => {
     
     if (form.email === "" || form.password === "") {
-      //Alert.alert("Error", "Please fill in all fields");
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft);
       return handleShowAlert("Error!", "Please fill in all fields.");
     }
 
@@ -51,12 +52,10 @@ const SignIn = () => {
       setUser(result);
       setIsLogged(true);
 
-      //Alert.alert("Success", "User signed in successfully");
       handleShowAlert("Success!", "User signed in successfully.");
       router.replace("/home");
     } catch (error: any) {
       handleShowAlert("Error!", error.message);
-      //Alert.alert("Error", error.message);
     } finally {
       setSubmitting(false);
     } 

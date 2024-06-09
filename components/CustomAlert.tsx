@@ -20,8 +20,9 @@ const CustomAlert = ({ visible, title, message, onDismiss }: CustomAlertProps) =
         <View className="bg-white rounded-lg p-10 items-center">
           {title && <Text className="text-primary font-psemibold text-2xl mb-10">{title}</Text>}
           <Text className="font-pregular text-center text-xl mb-10 text-primary">{message}</Text>
-          <TouchableOpacity onPress={onDismiss} className="bg-primary rounded-lg p-10 pt-4 pb-4 text-center ">
-            <Text className="text-white font-psemibold text-lg">OK</Text>
+          <TouchableOpacity onPress={onDismiss} activeOpacity={0.7}
+                className="bg-secondary rounded-lg p-10 pt-4 pb-4 text-center">
+            <Text className="text-black font-psemibold text-lg">OK</Text>
           </TouchableOpacity>
         </View>
       </View>

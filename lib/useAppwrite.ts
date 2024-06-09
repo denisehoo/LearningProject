@@ -10,10 +10,9 @@ interface UseAppwriteProps {
 const useAppwrite = ({ fn }: UseAppwriteProps, ...params: any[]) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  //console.log("useAppwrite..."+fn);
 
   const fetchData = async () => {
-    //console.log("fetchData...");
+
     setLoading(true);
     try {
       const res = await fn(...params);
@@ -26,7 +25,6 @@ const useAppwrite = ({ fn }: UseAppwriteProps, ...params: any[]) => {
   };
 
   useEffect(() => {
-    //console.log("UseEffect Fetching data...");
     fetchData();
   }, []);
 

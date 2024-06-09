@@ -1,5 +1,6 @@
 import { router } from "expo-router";
 import { View, Text, Image } from "react-native";
+import * as Haptics from 'expo-haptics';
 
 import { images } from "../constants";
 import CustomButton from "./CustomButton";
@@ -25,7 +26,9 @@ const EmptyState = ({ title, subtitle }: EmptyStateProps) => {
 
       <CustomButton
         title="Back to Explore"
-        handlePress={() => router.push("/home")}
+        handlePress={() => {
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+          router.push("/home")}}
         containerStyles="w-full my-5"
       />
     </View>

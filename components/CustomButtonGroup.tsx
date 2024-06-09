@@ -29,6 +29,7 @@ const CustomButtonGroup = ({ options, onSelect, defaultValue, label, otherStyles
         {options.map((option: ButtonOption) => (
             <TouchableOpacity
             key={option.value}
+            activeOpacity={0.7}
             className={`flex-1 px-15 py-5 border-2 bg-black-100 rounded-2xl border-black-200 mx-1 items-center
             ${selectedValue === option.value ? 'bg-secondary text-black' : 'bg-black-100 text-white'}`}
             onPress={() => handleSelect(option.value)}
