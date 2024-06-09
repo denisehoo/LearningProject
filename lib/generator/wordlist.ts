@@ -5,7 +5,6 @@ class MySentencelist {
   private animal:string;
 
   constructor() {
-    //this.wordlist = ["Dragon", "Castle", "Moon", "Forest", "Apple", "Fish", "Green", "Banana", "Eevee", "Inspiration"];
     this.animal = "{Aardvark|Albatross|Alligator|Alpaca|Ant|Anteater|Antelope|Ape|Armadillo|Donkey|Baboon|Badger|Barracuda|Bat|Bear|Beaver|Bee|Bison|Boar|Buffalo|Butterfly|Camel|Capybara|Caribou|Cassowary|Cat|Caterpillar|Cattle|Chamois|Cheetah|Chicken|Chimpanzee|Chinchilla|Chough|Clam|Cobra|Cockroach|Cod|Cormorant|Coyote|Crab|Crane|Crocodile|Crow|Curlew|Deer|Dinosaur|Dog|Dogfish|Dolphin|Dotterel|Dove|Dragonfly|Duck|Dugong|Dunlin|Eagle|Echidna|Eel|Eland|Elephant|Elk|Emu|Falcon|Ferret|Finch|Fish|Flamingo|Fly|Fox|Frog|Gaur|Gazelle|Gerbil|Giraffe|Gnat|Gnu|Goat|Goldfinch|Goldfish|Goose|Gorilla|Goshawk|Grasshopper|Grouse|Guanaco|Gull|Hamster|Hare|Hawk|Hedgehog|Heron|Herring|Hippopotamus|Hornet|Horse|Human|Hummingbird|Hyena|Ibex|Ibis|Jackal|Jaguar|Jay|Jellyfish|Kangaroo|Kingfisher|Koala|Kookabura|Kouprey|Kudu|Lapwing|Lark|Lemur|Leopard|Lion|Llama|Lobster|Locust|Loris|Louse|Lyrebird|Magpie|Mallard|Manatee|Mandrill|Mantis|Marten|Meerkat|Mink|Mole|Mongoose|Monkey|Moose|Mosquito|Mouse|Mule|Narwhal|Newt|Nightingale|Octopus|Okapi|Opossum|Oryx|Ostrich|Otter|Owl|Oyster|Panther|Parrot|Partridge|Peafowl|Pelican|Penguin|Pheasant|Pig|Pigeon|Pony|Porcupine|Porpoise|Quail|Quelea|Quetzal|Rabbit|Raccoon|Rail|Ram|Rat|Raven|Red deer|Red panda|Reindeer|Rhinoceros|Rook|Salamander|Salmon|Sand Dollar|Sandpiper|Sardine|Scorpion|Seahorse|Seal|Shark|Sheep|Shrew|Skunk|Snail|Snake|Sparrow|Spider|Spoonbill|Squid|Squirrel|Starling|Stingray|Stinkbug|Stork|Swallow|Swan|Tapir|Tarsier|Termite|Tiger|Toad|Trout|Turkey|Turtle|Viper|Vulture|Wallaby|Walrus|Wasp|Weasel|Whale|Wildcat|Wolf|Wolverine|Wombat|Woodcock|Woodpecker|Worm|Wren|Yak|Zebra}";
 
     this.wordlist = [
@@ -13,7 +12,7 @@ class MySentencelist {
       "{a horde of minions|an array of celestial servants|a legion of spectral beings} {behind|in front of} then", 
       "{close-up|character|portrait} portrait of a "+this.animal+" -{man|woman}", 
       "{servant|god|priest|warrior|gardener|keeper} of {the underworld|the seven worlds|light|darkness|jungle world|cybercrystal|blue fire|electrical storms|the deep heart|the overworld|luxury|dragonkind}",
-      "{a} {cute |^3}"+this.animal+" x "+this.animal+" hybrid, pokemon-like creature",
+      "{cute|charisma|legendary}"+this.animal+" x "+this.animal+" hybrid, pokemon-like creature",
       "{cyborg|steampunk|magical} {mermaid|merman|dolphin} exploring {a coral reef|an underwater city|underwater dunes}",
       "{steampunk|futuristic|ancient} explorer with {an airship|a hoverbike|a time-traveling artifact}",
       "{graceful|agile|mysterious} {alien|human|robotic} dancer performing {on stage|in a street|in moonlight}",

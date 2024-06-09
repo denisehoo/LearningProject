@@ -3,7 +3,7 @@ import { Alert } from 'react-native';
 import axios, { AxiosHeaders } from 'axios';
 
 // Hypothetical function to replace Puppeteer-based scraping
-export async function fetchUserKeyFromAPI(): Promise<string> {
+export async function fetchUserKeyFromAPI(){
   try {
     let headers = new AxiosHeaders();
 
@@ -11,40 +11,39 @@ export async function fetchUserKeyFromAPI(): Promise<string> {
     headers.setAccept('Accept', 'application/json');
     headers.set("Access-Control-Allow-Origin", "*");
 
-    const response = await axios.get('http://yourhost:5000/getkey', {headers: headers});
-    console.log("response.data.userKey: "+response.data.key);
-    return response.data.key.toString(); 
-/*     if (response.status === 200) {
-      return response.data.userKey; 
+    const response = await axios.get('http://192.168.1.38:5000/getkey', {headers: headers});
+
+   if (response.status == 200) {
+      return response.data.key.toString(); // the return json is key instead of userKey
     } else {
-      throw new Error('Failed to fetch user key');
-    } */
-  } catch (error) {
-    console.error('Error fetching user key from API:', error);
-    throw error;
+      Alert.alert("Key API returned status code", response.status.toString());
+    }
+
+    return null;
+  } catch (error:any) {
+    Alert.alert("fetchKeyAPI: ", error.message);
+    return null;
   }
 }
 
-export async function saveKey(key: string): Promise<void> {
+export async function saveUserKey(userKey: string): Promise<void> {
   
   const path = `${FileSystem.documentDirectory}/last-key.json`
 
-  console.log(`Found key ${key.substring(0, 10)}...`);
-
-  await FileSystem.writeAsStringAsync(path, JSON.stringify({ userKey: key }), {
+  await FileSystem.writeAsStringAsync(path, JSON.stringify({ userKey: userKey }), {
     encoding: FileSystem.EncodingType.UTF8,
   });
 }
 
 export async function getKey(): Promise<string | null> {
-  let key: string | null = null;
+  let foundUserKey: string | null = null;
   const path = `${FileSystem.documentDirectory}/last-key.json`;
 
   try {
     const fileExists = (await FileSystem.getInfoAsync(path)).exists;
-    console.log(path);
+    
     if (fileExists) {
-      const fileContent = await FileSystem.readAsStringAsync(path); console.log(fileContent.toString());
+      const fileContent = await FileSystem.readAsStringAsync(path); 
       const verificationUrl = 'https://image-generation.perchance.org/api/checkVerificationStatus';
       const { userKey } = JSON.parse(fileContent);
       const cacheBust = Math.random();
@@ -55,21 +54,22 @@ export async function getKey(): Promise<string | null> {
 
       const response = await axios.get(verificationUrl, { params: verificationParams });
       if (response.data.status !=='not_verified') {
-        key = userKey;
-        console.log(`Found working key `+ key?.substring(0, 10)+`... in file.`);
-        return key;
+        foundUserKey = userKey;
+        return foundUserKey;
       }
     }
 
-    console.log('Key no longer valid. Looking for a new key...');
+    foundUserKey = await fetchUserKeyFromAPI();
 
-    key = await fetchUserKeyFromAPI();
-    saveKey(key);
-
-    return key;
+    if(foundUserKey) {
+      saveUserKey(foundUserKey);
+      return foundUserKey;
+    }
+    else {  
+      return null;
+    }
 
   } catch (error) {
-    console.error('Error fetching or saving key:', error);
     Alert.alert('Error', 'Failed to fetch or save key.');
     return null;
   }

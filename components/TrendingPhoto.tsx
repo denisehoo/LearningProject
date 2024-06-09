@@ -5,10 +5,7 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from "react-native";
-import { ResizeMode, Video } from "expo-av";
 import * as Animatable from "react-native-animatable";
-
-import { icons } from "../constants";
 
 
 Animatable.initializeRegistryWithDefinitions({
@@ -40,8 +37,7 @@ interface TrendingItemProps {
     item: any;
 }
 
-const TrendingItem = ({ activeItem, item }: TrendingItemProps) => {
-  const [play, setPlay] = useState(false);
+const TrendingPhotoItem = ({ activeItem, item }: TrendingItemProps) => {
 
   const animationName = activeItem === item.$id ? 'customZoomIn' : 'customZoomOut';
 
@@ -51,45 +47,18 @@ const TrendingItem = ({ activeItem, item }: TrendingItemProps) => {
       animation={animationName}
       duration={500}
     >
-      {play ? (
-        <Video
-          source={{ uri: item.video }}
-          className="w-52 h-72 rounded-[33px] mt-3 bg-white/10"
-          resizeMode={ResizeMode.CONTAIN}
-          useNativeControls
-          shouldPlay
-          onPlaybackStatusUpdate={(status:any) => {
-            if (status.didJustFinish) {
-              setPlay(false);
-            }
-          }}
+        <Image
+        source={{
+            uri: item.photo,
+        }}
+        className="w-52 h-72 rounded-[33px] my-5 overflow-hidden shadow-lg shadow-black/40"
+        resizeMode="cover"
         />
-      ) : (
-        <TouchableOpacity
-          className="relative flex justify-center items-center"
-          activeOpacity={0.7}
-          onPress={() => setPlay(true)}
-        >
-          <ImageBackground
-            source={{
-              uri: item.thumbnail,
-            }}
-            className="w-52 h-72 rounded-[33px] my-5 overflow-hidden shadow-lg shadow-black/40"
-            resizeMode="cover"
-          />
-
-          <Image
-            source={icons.play}
-            className="w-12 h-12 absolute"
-            resizeMode="contain"
-          />
-        </TouchableOpacity>
-      )}
     </Animatable.View>
   );
 };
 
-const Trending = ({ posts }:any) => {
+const TrendingPhoto = ({ posts }:any) => {
   const [activeItem, setActiveItem] = useState(posts[0]);
 
   const viewableItemsChanged = ({ viewableItems }:any) => {
@@ -104,7 +73,7 @@ const Trending = ({ posts }:any) => {
       horizontal
       keyExtractor={(item) => item.$id}
       renderItem={({ item }) => (
-        <TrendingItem activeItem={activeItem} item={item} />
+        <TrendingPhotoItem activeItem={activeItem} item={item} />
       )}
       onViewableItemsChanged={viewableItemsChanged}
       viewabilityConfig={{
@@ -114,4 +83,4 @@ const Trending = ({ posts }:any) => {
   );
 };
 
-export default Trending;
+export default TrendingPhoto;

@@ -1,26 +1,53 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ResizeMode, Video } from "expo-av";
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import * as Haptics from 'expo-haptics';
+import { View, Text, TouchableOpacity, Image, Alert } from "react-native";
+import { Models } from "react-native-appwrite";
 
 import { icons } from "../constants";
+import { useGlobalContext } from "../context/GlobalProvider";
+import { updateLike } from "../lib/appwrite";
 
 interface PhotoCardProps {
+    document:Models.Document;
     title: string;
     creator: string;
     avatar: string;
-    thumbnail: string;
-    prompt: string;
+    photo: string;
+    artStyle: string;
+    description?: string;
+    positive:string;
+    negative:string;
+    likes: Models.Document[];
+    handleRefresh: () => void;
 }
 
-const PhotoCard = ({ title, creator, avatar, thumbnail, prompt }: PhotoCardProps) => {
+const PhotoCard = ({ document, title, creator, avatar, photo, artStyle, description, positive, negative , likes, handleRefresh}: PhotoCardProps) => {
+
+  const { user } = useGlobalContext();
   const [isOverlayVisible, setOverlayVisible] = useState(false);
+
+  const toggleBookmark = async() =>{
+
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+
+    if((likes.length > 0 && likes.filter(like => like.username === `${creator}`).length > 0)) {
+      likes = likes.filter(like => like.username !== `${creator}`);
+    }
+    else if(user!==null && user!==undefined){
+      likes.push(user);
+    }
+
+    await updateLike(document,likes).then().catch(error => Alert.alert("Error in Bookmark", error)).finally(() => handleRefresh());
+  
+  }
 
   const handlePress = () => {
     setOverlayVisible(!isOverlayVisible);
   };
   
     return (
-      <View className="flex flex-col items-center px-4 mb-14">
+      <View className="flex flex-col items-center px-4 mb-16">
         <View className="flex flex-row gap-3 items-start">
           <View className="flex justify-center items-center flex-row flex-1">
             <View className="w-[46px] h-[46px] rounded-lg border border-secondary flex justify-center items-center p-0.5">
@@ -36,7 +63,7 @@ const PhotoCard = ({ title, creator, avatar, thumbnail, prompt }: PhotoCardProps
                 className="font-psemibold text-sm text-white"
                 numberOfLines={1}
               >
-                {title}
+                {title} - [{artStyle}]
               </Text>
               <Text
                 className="text-xs text-gray-100 font-pregular"
@@ -46,10 +73,18 @@ const PhotoCard = ({ title, creator, avatar, thumbnail, prompt }: PhotoCardProps
               </Text>
             </View>
           </View>
-  
-          <View className="pt-2">
-            <Image source={icons.menu} className="w-5 h-5" resizeMode="contain" />
-          </View>
+
+          <TouchableOpacity
+            activeOpacity={0.5}
+            onPress={() => toggleBookmark()}
+            
+          >
+            <View className="pt-2">
+              <Image source={(likes.length > 0 && likes.filter(like => like.username === creator ).length > 0 )  ? icons.bookmark_filled : icons.bookmark} 
+                    className="w-5 h-5" resizeMode="contain" alt="bookmark "/>
+            </View>
+          </TouchableOpacity>
+
         </View>
   
           <TouchableOpacity
@@ -59,14 +94,19 @@ const PhotoCard = ({ title, creator, avatar, thumbnail, prompt }: PhotoCardProps
             className="w-full h-60 rounded-xl mt-3 relative flex justify-center items-center"
           >
             <Image
-              source={{ uri: thumbnail }}
+              source={{ uri: photo }}
               className="w-full h-full rounded-xl mt-3"
               resizeMode="contain"
             />
             {isOverlayVisible && (
-                <View className="opacity-60 flex justify-start items-start bg-black absolute top-32 w-[85%] h-[50%]">
-                  <Text className="font-psemibold text-sm text-white">Prompt: </Text>
-                  <Text className="font-pregular text-sm text-white"> {prompt}</Text>
+                <View className="opacity-60 flex justify-start items-start bg-black absolute w-[98%] h-[90%]">
+                  <Text className="font-psemibold text-sm text-white">Art Style: {artStyle}</Text>
+                  <Text className="font-psemibold text-sm text-white">Appearance: 
+                  <Text className="font-pregular text-sm text-white"> {description}</Text></Text>
+                  <Text className="font-psemibold text-sm text-white">Avoidance: 
+                  <Text className="font-pregular text-sm text-white"> {negative}</Text></Text>
+                  <Text className="font-psemibold text-sm text-white">Prompt: 
+                  <Text className="font-pregular text-sm text-white"> {positive}</Text></Text>
                 </View>
             )}
           </TouchableOpacity>

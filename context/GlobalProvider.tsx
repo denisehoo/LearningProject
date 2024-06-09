@@ -1,6 +1,7 @@
-import React, { createContext, useContext, useState, useEffect, ReactElement } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import { Models} from 'react-native-appwrite';
 import { getCurrentUser } from "../lib/appwrite";
+import { Alert } from "react-native";
 
 interface GlobalProviderProps{
     isLogged?: boolean;
@@ -28,7 +29,7 @@ const GlobalProvider = ({ children }:any) => {
                 setUser(null);
             }
         }).catch((error) => {
-            console.log(error.message);
+            Alert.alert("Global Provider Get Current User"+error.message);
         }).finally(() => {
             setLoading(false);
         });

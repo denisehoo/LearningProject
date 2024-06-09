@@ -1,26 +1,5 @@
 [
 {
-    "label": "No Style",
-    "value": "no-style",
-    "name": "no-style",
-    "positive": "",
-    "negative": ""
-},
-{
-    "label":"cinematic",
-    "value": "cinematic",
-    "name": "cinematic",
-    "positive": "cinematic shot, dynamic lighting, 75mm, Technicolor, Panavision, cinemascope, sharp focus, fine details, 8k, HDR, realism, realistic, key visual, film still, superb cinematic color grading, depth of field",
-    "negative": "bad lighting, low-quality, deformed, text, poorly drawn, holding camera, bad art, bad angle, boring, low-resolution, worst quality, bad composition, disfigured"
-},
-{
-    "label": "traditional-japanese",
-    "value": "traditional-japanese",
-    "name": "traditional-japanese",
-    "positive": "in ukiyo-e art style, traditional japanese masterpiece",
-    "negative": "blurry, low resolution, worst quality, fuzzy"
-},
-{
     "label": "3D Disney Character",
     "value": "3D Disney Character",
     "name": "3D Disney Character",
@@ -40,4 +19,103 @@
     "name": "2D Pokemon",
     "positive": "pokemon creature concept, superb line art, beautiful colors and composition, 2d art style, beautiful pokemon digital art, fakemon, by Sowsow, pokemon creature, cryptid, fakemon, masterpiece, by Yuu Nishida, 4k",
     "negative": "multiple, grid, (black and white), distorted, deformed, bad art, low quality, crappy 3D render, text watermark symbols logo"
-}]
+},
+{
+    "label": "Anime",
+    "value": "Anime",
+    "name": "Anime",
+    "positive": "masterpiece, 4k, best quality, anime art",
+    "negative": "(worst quality, low quality:1.3), low-quality, deformed, text, poorly drawn, hilariously bad drawing, bad 3D render"
+},
+{
+    "label": "Cute Anime",
+    "value": "Cute Anime",
+    "name": "Cute Anime",
+    "positive": "(((adorable, cute, kawaii)), cute anime character portrait, adorable, featured on pixiv, kawaii moé masterpiece, cuteness overload, very detailed, sooooo adorable!!!, absolute masterpiece",
+    "negative": "(worst quality, low quality:1.3), worst quality, ugly, 3D, photograph, bad art, blurry, boring"
+},
+{
+    "label": "Claymation",
+    "value": "Claymation",
+    "name": "Claymation",
+    "positive": "claymation, incredible claymation style, kubo and the two strings style art, Missing Link 2019 art style, clay texture, clay animation, stop-motion clay",
+    "negative": "glossy, creepy, dead eyes, lifeless eyes, blurry, scary, boring, tiling, cropped, terrifying, horror, out of focus"
+},
+{
+    "label": "Cute Figurine",
+    "value": "Cute Figurine",
+    "name": "Cute Figurine",
+    "positive": "figurine, modern Disney style, octane render, chibi",
+    "negative": "low-quality, deformed, text, poorly drawn"
+},
+{
+    "label":"cinematic",
+    "value": "cinematic",
+    "name": "cinematic",
+    "positive": "cinematic shot, dynamic lighting, 75mm, Technicolor, Panavision, cinemascope, sharp focus, fine details, 8k, HDR, realism, realistic, key visual, film still, superb cinematic color grading, depth of field",
+    "negative": "bad lighting, low-quality, deformed, text, poorly drawn, holding camera, bad art, bad angle, boring, low-resolution, worst quality, bad composition, disfigured"
+},
+{
+    "label": "Concept Art",
+    "value": "Concept Art",
+    "name": "Concept Art",
+    "positive": "concept art, digital art, illustration, inspired by wlop style, 8k, fine details, sharp, very detailed, high resolution, masterpiece",
+    "negative": "low-quality, deformed, text, poorly drawn, worst quality, blurry"
+},
+{
+    "label": "Digital Painting",
+    "value": "Digital Painting",
+    "name": "Digital Painting",
+    "positive": "breathtaking digital art, trending on artstation, by atey ghailan, by greg rutkowski, by greg tocchini, by james gilleard, 8k, high resolution, best quality",
+    "negative": "low-quality, deformed, signature watermark text, poorly drawn"
+},
+{
+    "label": "Professional Photo",
+    "value": "Professional Photo",
+    "name": "Professional Photo",
+    "positive": "{sharp|soft} focus, depth of field, 8k photo, HDR, professional lighting, taken with Canon EOS R5, 75mm lens",
+    "negative": "worst quality, bad lighting, cropped, blurry, low-quality, deformed, text, poorly drawn, bad art, bad angle, boring, low-resolution, worst quality, bad composition, terrible lighting, bad anatomy"
+},
+{
+    "label": "Traditional Japanese",
+    "value": "Traditional Japanese",
+    "name": "Traditional Japanese",
+    "positive": "in ukiyo-e art style, traditional japanese masterpiece",
+    "negative": "blurry, low resolution, worst quality, fuzzy"
+},
+{
+    "label": "Studio Ghibli",
+    "value": "Studio Ghibli",
+    "name": "Studio Ghibli",
+    "positive": "(studio ghibli style art:1.3), sharp, very detailed, high resolution, inspired by hayao miyazaki, anime, art from ghibli movie",
+    "negative": "(worst quality, low quality:1.3), [input.negative], low-quality, deformed, text, poorly drawn"
+},
+{
+    "label": "Vintage Comic",
+    "value": "Vintage Comic",
+    "name": "Vintage Comic",
+    "positive": "comic book style art, (drawing, by Dave Stevens, by Adam Hughes, 1940's, 1950's:1.2), hand-drawn, color, high resolution, best quality, closeup",
+    "negative": "terrible photoshop, low contrast, disfigured, poorly drawn, deformed, tiled, cropped, framed"
+},
+{
+    "label": "Oil Painting",
+    "value": "Oil Painting",
+    "name": "Oil Painting",
+    "positive": "breathtaking alla prima oil painting, close up, (alla prima style:1.3), oil on linen, painterly oil on canvas, (painterly style:1.3), exquisite composition and lighting, modern painterly masterpiece, by alexi zaitsev, award-winning painterly alla prima oil painting",
+    "negative": "framed, faded colors, terrible photo, bad composition, hilariously bad drawing, bad photo, bad anatomy, extremely high contrast, worst quality, watermarked signature, bad colors, deformed, amputee, washed out, glare, boring colors, bad crayon drawing"
+},
+{
+    "label": "Pixel Art",
+    "value": "Pixel Art",
+    "name": "Pixel Art",
+    "positive": "best pixel art, neo-geo graphical style, retro nostalgic masterpiece, 128px, 16-bit pixel art , 2D pixel art style, adventure game pixel art, inspired by the art style of hyper light drifter, masterful dithering, superb composition, beautiful palette, exquisite pixel detail",
+    "negative": "glitched, deep fried, jpeg artifacts, out of focus, gradient, soft focus, low quality, poorly drawn, blur, grainy fabric texture, text, bad art, boring colors, blurry platformer screenshot"
+},
+{
+    "label": "Watercolor",
+    "value": "Watercolor",
+    "name": "Watercolor",
+    "positive": "(watercolor), high resolution, intricate details, 4k, wallpaper, concept art, watercolor on textured paper",
+    "negative": "low-quality, deformed, text, poorly drawn"
+}
+]

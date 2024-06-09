@@ -10,7 +10,7 @@ import EmptyState from "./EmptyState";
 import CustomAlert from "./CustomAlert";
 import CustomDropdown from "./CustomDropdown";
 import CustomButtonGroup from "./CustomButtonGroup";
-import ImageList from "./ImageList";
+import CustomPopup from "./CustomPopup";
 
 export {
   VideoCard,
@@ -24,6 +24,6 @@ export {
   CustomAlert,
   CustomDropdown,
   CustomButtonGroup,
+  CustomPopup,
   PhotoCard,
-  ImageList,
 };

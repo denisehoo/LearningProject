@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
-import * as FileSystem from 'expo-file-system';
+import { View, Text, TouchableOpacity, ActivityIndicator,  ScrollView} from 'react-native';
 
 export interface CustomDDOption {
   label: string;
@@ -41,7 +40,6 @@ const CustomDropdown = ({
         setOptions(optionsData);
         setLoading(false);
       } catch (error) {
-        console.error("Error loading JSON file:", error);
         setLoading(false);
       }
     };
@@ -82,12 +80,13 @@ const CustomDropdown = ({
       <Text className="text-base text-gray-100 font-pmedium ml-2">{label}</Text>
       <TouchableOpacity className={`${isOpen ? 'border-secondary' : 'border-black-200'} w-full h-16 px-4 bg-black-100 rounded-2xl border-2
        border-black-200 focus:border-secondary flex flex-row items-center`} 
-       onPress={toggleDropdown}>
+       onPress={toggleDropdown}
+       activeOpacity={0.7}>
         <Text className={`flex-1 text-white font-psemibold text-base ${selectedValues === '' ?  'text-[#7B7B8B]' : 'text-white'}`}>
             {multiple ? 'Select' : (selectedValues || placeholder || 'Select')}</Text>
       </TouchableOpacity>
       {isOpen && (
-        <View className=" w-[90%] rounded-xl mt-1 bg-gray-100 mx-5">
+        <ScrollView className=" w-[90%] h-[90%] rounded-xl mt-1 bg-gray-100 mx-5">
           {options.map((item: CustomDDOption) => (
             <TouchableOpacity
               key={item.label}
@@ -97,7 +96,7 @@ const CustomDropdown = ({
               <Text className={`mx-5 font-pregular`} >{item.label}</Text>
             </TouchableOpacity>
           ))}
-        </View>
+        </ScrollView>
       )}
     </View>
   );

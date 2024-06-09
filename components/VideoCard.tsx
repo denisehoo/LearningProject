@@ -44,7 +44,7 @@ const VideoCard = ({ title, creator, avatar, thumbnail, video }: VideoCardProps)
           </View>
   
           <View className="pt-2">
-            <Image source={icons.menu} className="w-5 h-5" resizeMode="contain" />
+            <Image source={icons.bookmark} className="w-5 h-5" resizeMode="contain" />
           </View>
         </View>
   

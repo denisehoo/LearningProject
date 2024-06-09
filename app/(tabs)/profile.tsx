@@ -1,20 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { router } from "expo-router";
+import * as Haptics from 'expo-haptics';
 import { SafeAreaView } from "react-native-safe-area-context";
-import { View, Image, FlatList, TouchableOpacity } from "react-native";
+import { View, Image, FlatList, TouchableOpacity, RefreshControl } from "react-native";
 import { Models } from "react-native-appwrite";
 
 import { icons } from "../../constants";
 import useAppwrite from "../../lib/useAppwrite";
-import { getUserPosts, signOut } from "../../lib/appwrite";
+import { getUserPhotoPosts, signOut } from "../../lib/appwrite";
 import { useGlobalContext } from "../../context/GlobalProvider";
-import { EmptyState, InfoBox, VideoCard } from "../../components";
+import { EmptyState, InfoBox, PhotoCard, VideoCard } from "../../components";
 
 const Profile = () => {
   const { user, setUser, setIsLogged } = useGlobalContext();
-  const { data: posts } = useAppwrite({fn : getUserPosts}, user?.$id);
+  const { data: posts , refetch} = useAppwrite({fn : getUserPhotoPosts}, user?.$id);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await refetch();
+    setRefreshing(false);
+  };
 
   const logout = async () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     await signOut();
     setUser(null as any | null);
     setIsLogged(false);
@@ -28,23 +37,30 @@ const Profile = () => {
         data={posts}
         keyExtractor={(item:Models.Document) => item.$id}
         renderItem={({ item }) => (
-          <VideoCard
+          <PhotoCard
+            document = {item}
             title={item.title}
-            thumbnail={item.thumbnail}
-            video={item.video}
             creator={item.creator.username}
             avatar={item.creator.avatar}
+            photo={item.photo}
+            artStyle={item.artStyle}
+            description={item.description}
+            positive={item.positive}
+            negative={item.negative}
+            likes={item.likes}
+            handleRefresh={onRefresh}
           />
         )}
         ListEmptyComponent={() => (
           <EmptyState
-            title="No Videos Found"
-            subtitle="No videos found for this profile"
+            title="No Photos Found"
+            subtitle="No Photos found for this profile"
           />
         )}
         ListHeaderComponent={() => (
           <View className="w-full flex justify-center items-center mt-6 mb-12 px-4">
             <TouchableOpacity
+              activeOpacity={0.7}
               onPress={logout}
               className="flex w-full items-end mb-10"
             >
@@ -84,6 +100,9 @@ const Profile = () => {
             </View>
           </View>
         )}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       />
     </SafeAreaView>
   );
