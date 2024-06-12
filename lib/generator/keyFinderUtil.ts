@@ -11,7 +11,7 @@ export async function fetchUserKeyFromAPI(){
     headers.setAccept('Accept', 'application/json');
     headers.set("Access-Control-Allow-Origin", "*");
 
-    const response = await axios.get('http://192.168.1.38:5000/getkey', {headers: headers});
+    const response = await axios.get('http://localhost:5000/getkey', {headers: headers});
 
    if (response.status == 200) {
       return response.data.key.toString(); // the return json is key instead of userKey
@@ -44,7 +44,7 @@ export async function getKey(): Promise<string | null> {
     
     if (fileExists) {
       const fileContent = await FileSystem.readAsStringAsync(path); 
-      const verificationUrl = 'https://image-generation.perchance.org/api/checkVerificationStatus';
+      const verificationUrl = 'https://image-generation.perchance.org/api/checkUserVerificationStatus';
       const { userKey } = JSON.parse(fileContent);
       const cacheBust = Math.random();
       const verificationParams = {
@@ -61,7 +61,7 @@ export async function getKey(): Promise<string | null> {
 
     foundUserKey = await fetchUserKeyFromAPI();
 
-    if(foundUserKey) {
+    if(foundUserKey!==null) {
       saveUserKey(foundUserKey);
       return foundUserKey;
     }
