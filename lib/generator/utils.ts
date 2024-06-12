@@ -46,4 +46,7 @@ export function replaceRandomWords(input: string): string {
     return randomWord;
   })
 }
-  
+
+export function replaceDescription(prompt: string, desc: string): string {
+  return prompt.replace(/\[input\.description\]/g, desc);
+}

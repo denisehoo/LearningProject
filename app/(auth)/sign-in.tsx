@@ -6,7 +6,7 @@ import { View, Text, ScrollView, Dimensions, Alert, Image } from "react-native";
 
 import { images } from "../../constants";
 import { CustomButton, FormField, CustomAlert } from "../../components";
-import { getCurrentUser, signIn } from "../../lib/appwrite";
+import { getCurrentUser, signIn , getEmailToken} from "../../lib/appwrite";
 import { useGlobalContext } from "../../context/GlobalProvider";
 
 const SignIn = () => {
@@ -14,7 +14,7 @@ const SignIn = () => {
   const [isSubmitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
     email: "",
-    password: "",
+    passcode: "",
   });
 
   const [alertData, setAlertData] = useState<{ visible: boolean; title: string; message: string }>({
@@ -36,10 +36,13 @@ const SignIn = () => {
     setAlertData({ ...alertData, visible: false });
   };
 
+  const getVerification = async () => {
+    await getEmailToken(form.email);
+  }
 
   const submit = async () => {
     
-    if (form.email === "" || form.password === "") {
+    if (form.email === "" || form.passcode === "") {
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft);
       return handleShowAlert("Error!", "Please fill in all fields.");
     }
@@ -47,7 +50,7 @@ const SignIn = () => {
     setSubmitting(true);
 
     try {
-      await signIn(form.email, form.password);
+      await signIn(form.email, form.passcode);
       const result = await getCurrentUser();
       setUser(result);
       setIsLogged(true);
@@ -60,6 +63,7 @@ const SignIn = () => {
       setSubmitting(false);
     } 
   };
+
 
   return (
     <SafeAreaView className="bg-primary h-full">
@@ -88,10 +92,16 @@ const SignIn = () => {
             keyBoardStyle="email-address"
           />
 
+          <CustomButton
+            title="Send OTP to email"
+            handlePress={getVerification}
+            containerStyles="mt-7"
+          />
+
           <FormField
-            title="Password"
-            value={form.password}
-            handleChangeText={(e) => setForm({ ...form, password: e })}
+            title="OTP for Cubator Login"
+            value={form.passcode}
+            handleChangeText={(e) => setForm({ ...form, passcode: e })}
             otherStyles="mt-7"
           />
 

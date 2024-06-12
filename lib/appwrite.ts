@@ -37,8 +37,6 @@ export async function createUser(username:string, email:string, password:string)
 
         const avatarUrl = avatars.getInitials(username);
 
-        await signIn(email, password);
-
         const newUser = await databases.createDocument(appwriteConfig.databaseId, 
             appwriteConfig.userCollectionId, ID.unique(), 
             {
@@ -48,10 +46,24 @@ export async function createUser(username:string, email:string, password:string)
                 avatar: avatarUrl,
             });
 
+        await signIn(email, password);
+
         return newUser;
 
     }catch(error:any){
       Alert.alert("CreateUser: ", error.message);
+    }
+}
+
+export async function getEmailToken(email:string){
+    try{
+      const currentUser = await databases.listDocuments(appwriteConfig.databaseId, 
+        appwriteConfig.userCollectionId,[Query.equal("email", email)]);
+
+        const token = await account.createEmailToken( currentUser.documents[0].accountId, email);
+
+    }catch(error:any){  
+        Alert.alert("verification: ", error.message);
     }
 }
 
@@ -60,7 +72,10 @@ export async function signIn(email:string, password:string){
 
       account.deleteSessions;
 
-      const session = await account.createEmailPasswordSession(email, password);
+      const registeredUser = await databases.listDocuments(appwriteConfig.databaseId, 
+        appwriteConfig.userCollectionId,[Query.equal("email", email)]);
+
+      const session = await account.createSession(registeredUser.documents[0].accountId, password);
 
       if(!session){
           Alert.alert("Failed to sign in");

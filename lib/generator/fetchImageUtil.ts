@@ -1,9 +1,8 @@
 import * as FileSystem from 'expo-file-system';
 import * as MediaLibrary from "expo-media-library";
-import * as Sharing from "expo-sharing";
 
-import axios from 'axios';
-import { encode, replaceRandomWords } from './utils';
+import axios, { AxiosHeaders } from 'axios';
+import { encode, replaceDescription, replaceRandomWords } from './utils';
 import  { getStyleByName, StyleDataProp }  from './styles';
 import MySentencelist from './wordlist';
 import { Alert } from 'react-native';
@@ -74,10 +73,10 @@ export function formFinalPrompts(prompt = 'RANDOM', negativePrompt = '', style =
  
     styleChoice = getStyleByName(style);
     
-    const promptStyle = styleChoice.positive;
+    const promptStyle = replaceDescription(replaceRandomWords(styleChoice.positive), promptBase);
     const negativePromptStyle = styleChoice.negative;
 
-    const promptQuery = encode('\'' + promptBase + ', ' + promptStyle);
+    const promptQuery = encode('\'' + promptStyle);
     const negativePromptQuery = encode('\'' + negativePrompt + ', ' + negativePromptStyle);
 
     return {promptQuery: promptQuery, negativePromptQuery: negativePromptQuery};
@@ -99,7 +98,7 @@ export async function getImageId(
     prompt: promptQuery,
     negativePrompt: negativePromptQuery,
     userKey: userKey,
-    __cache_bust: cacheBust,
+    __cacheBust: cacheBust,
     seed: '-1',
     resolution: resolution,
     guidanceScale: guidanceScale.toString(),
@@ -108,13 +107,12 @@ export async function getImageId(
     requestId: requestId
   };
 
-  const createResponse = await axios.get(createUrl, { params: createParams });
+  const createResponse = await axios.get(createUrl,  { params: createParams });
 
   if (createResponse.data.status === 'not_verified') {
     Alert.alert("Invalid key: ", "Please generate image again.");
   }
   
-
   let imageId: string | null = null;
   while (!imageId) {
     try {

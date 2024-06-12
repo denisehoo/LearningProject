@@ -1,5 +1,5 @@
 import { View, Text, ScrollView, Keyboard, Alert } from 'react-native'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import * as Animatable from "react-native-animatable";
 import * as Haptics from 'expo-haptics';
@@ -108,7 +108,7 @@ const Create = () => {
         <FormField
           title="Appearance"
           value={form.positivePrompt}
-          placeholder="Describe how your character look...."
+          placeholder="Describe your art, mentioning the artist can be helpful...."
           handleChangeText={(e) => setForm({ ...form, positivePrompt: e })}
           otherStyles="mt-10 size-large"
           multiline={true}
